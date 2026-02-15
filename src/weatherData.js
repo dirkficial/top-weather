@@ -1,5 +1,6 @@
 class WeatherData {
-    constructor(temp, feelslike, condition, maxtemp, mintemp, date) {
+    constructor(location, temp, feelslike, condition, maxtemp, mintemp, date) {
+        this.location = location;
         this.temp = temp;
         this.feelslike = feelslike;
         this.condition = condition;
@@ -17,6 +18,6 @@ export default function processAPI(response) {
     const date = response.days[0].datetime;
     const tempmax = response.days[0].tempmax;
     const tempmin = response.days[0].tempmin;
-
-    return new WeatherData(currentTemp, currentFeelsLike, currentCond, tempmax, tempmin, date);
+    const location = response.resolvedAddress;
+    return new WeatherData(location, currentTemp, currentFeelsLike, currentCond, tempmax, tempmin, date);
 }
